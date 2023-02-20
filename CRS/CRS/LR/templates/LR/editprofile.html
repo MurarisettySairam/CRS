@@ -1,0 +1,82 @@
+{% extends 'LR/layout.html' %}
+{% block body %}
+  <form onsubmit="return validation();" style="margin:90px">
+	<div class="row ">
+      <div class="col-md-9 personal-info"> 
+        <h3>Edit Profile</h3>    
+          <div class="form-group">
+            <label class="col-md-3 control-label">Username:</label>
+            <div class="col-md-8">
+              <input name="username" class="form-control" type="text" id="username">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Password:</label>
+            <div class="col-md-8">
+              <input name="password" class="form-control" type="password" id="password">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Confirm password:</label>
+            <div class="col-md-8">
+              <input name="cpassword" class="form-control" type="password" id="cpassword">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label"></label>
+            <div class="col-md-8">
+              <button id="savechanges" type="submit" class="btn btn-primary">Save Changes</button>
+              <span></span>
+              <input id="cancel" type="reset" class="btn btn-default" value="Cancel">
+            </div>
+          </div>
+      </div>
+  </div>
+  </div>
+  {% for message in messages %}
+  <p style ="color:rgb(255, 0, 0)">{{message}}</p>
+  {% endfor %}
+</form>
+<script>
+  function validation(){
+    var uname=document.getElementById('username');
+    var password=document.getElementById('password');
+    var cpassword=document.getElementById('cpassword');
+  
+    
+    if((uname.value.trim().length <= 4) || (uname.value.trim().length > 15)) {
+        uname.style.border="solid 2px red";
+        alert("Username lenght must be between 4 and 15")
+        return false;	
+    }
+    else if(!isNaN(uname.value.trim())){
+        uname.style.border="solid 2px red";
+        alert("Username Lenght Must Be Between 4 And 15")
+        return false;
+    }
+    else if(password.value.trim() == ""){
+        password.style.border="solid 2px red";
+        alert("Please Fill The Password Field")
+        return false;
+    }
+    else if((password.value.trim().length < 4) || (password.value.trim().length > 15)) {
+        password.style.border="solid 2px red";
+        alert("Passwords Lenght Must Be Between 4 And 15")
+        return false;	
+    }
+    else if(cpassword.value.trim() == ""){
+      cpassword.style.border="solid 2px red";
+      alert("Please Fill The Confirmpassword Field")
+      return false;
+    }
+    else if(cpassword.value.trim()!= password.value.trim()){
+        password.style.border="solid 3px red";
+        alert("Please Make Sure That Confirmpassword And Password Are The Same.")
+        return false;
+    }
+    else{
+        return true;
+    }
+  }
+</script>
+{% endblock %}

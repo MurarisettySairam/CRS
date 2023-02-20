@@ -1,0 +1,19 @@
+{% extends 'LR/layout.html' %}
+{% block body %}
+    <form>
+      <div class="container" style="margin: 100px;">
+        <div class="row">
+          <div class="col-sm-5 mx-auto">
+            <div style="font-weight: bold; font-size:30px;" id="emailHelp" class="form-text">Account Details</div><br>
+                <label for="exampleInputEmail1" class="form-label">Email Address</label>
+                <span id="Email" class="d-block p-2 bg-bright text-black" style="width: 100%; border: solid black 1px">{{user.username}}</span><br>
+                <label for="exampleInputEmail1" class="form-label">Password</label>
+                <input type="password" value="Password" id="myInput" class="d-block p-2 bg-bright text-black" style="width: 100%; border: solid black 1px;"><br>
+                <input type="checkbox" onclick="myFunction()">Show Password<br><br>
+                <button id = "accclose" class="btn btn-outline-secondary" type="button">Close</button>
+          </div>
+        </div>
+      </div>
+    </form> 
+    <script src="./accountdetails.js"></script>
+{% endblock %}

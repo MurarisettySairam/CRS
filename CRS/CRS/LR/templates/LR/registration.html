@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name = "viewport" content="width=device-width, intial scale =1.0">
+    <title>Login/Register</title>
+    <!-- <link rel="stylesheet" href="rgstr.css"> -->
+    <style>
+        :root{
+            --main-color: #44f16f;
+            --dark-color: #11152a;
+            --light-color: #d0d4ed;
+        }
+        
+        *{
+            margin:0;
+            padding: 0;
+        }
+        
+        *, ::before, ::after{
+            box-sizing: border-box;
+        }
+        
+        body{
+            font-family: sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.8;
+            color: var(--dark-color);
+            background-color: whitesmoke;
+        }
+        h2{
+            font-size: 3em;
+            font-weight: 400;
+            line-height: 1.2;
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        ul{
+            list-style: none;
+        }
+        
+        .container{
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .logo img{
+            border-radius: 100%;
+            width:auto;
+            height: auto;
+        }
+        
+        .wrapper>div {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 800px;
+            min-height: 500px;
+            margin: 5em auto;
+            background-color: var(--main-color);
+            overflow: hidden;
+            box-shadow: rgb(123, 197, 123) 0 20px 20px;
+        }
+        
+        :is(.login, .signup)>div {
+            position: relative;
+            flex: 1 0 50%;
+            padding: 60px;
+        }
+        
+        .content-heading .y-style{
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .content-form{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        form input:not(#terms,#remember) {
+            font-family: inherit;
+            width:100%;
+            outline: 0;
+            margin: 0 0 20px;
+            padding: 12px 12px;
+            border-radius: 8px;
+            border: 1px solid black;
+            
+        }
+        
+        form button {
+            background-color: darkred;
+            color:white;
+            width:100%;
+            margin: 30px 0;
+            border: 0;
+            line-height: 40px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-family:monospace;
+            cursor: pointer;
+            transition: all .3s ease-out;
+            -webkit-transition: all .3s ease-out;
+            
+        }
+        
+        button:hover{
+            background-color: crimson;
+        }
+        
+        .afterform {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        form .check {
+            position: relative;
+            font-size: 15px;
+        }
+        
+        .content-form::before{
+            content: "";
+            position:absolute;
+            width:200%;
+            height: 200%;
+            background-color:whitesmoke;
+            border-radius: 50%;
+            transform: translate3d(-20%, 20%, 0);
+            -webkit-transform: translate3d(-20%, 20% 0);
+        }
+        
+        .y-style {
+            position:relative;
+        }
+        
+        .social :is(ul,p){
+            display: flex;
+            justify-content: center;
+            position: relative;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .social a {
+            display: flex;
+            font-size: 30px; 
+        }
+        
+        .social .google {
+            color: #db4437;
+        }
+        
+        .social .facebook {
+            color: #4267b2;
+        }
+        
+        .login-show .signup,  .signup-show .login {
+            display: none;
+        }
+        
+        .signup-show .signup, .login-show .login {
+            display: flex;
+        } 
+        
+        
+        
+        @media screen and (min-width: 768px) {
+            .wrapper>div {
+                flex-direction: row;
+                max-width: 800px;
+            }
+            .signup .content-heading .y-style {
+                height: 100%;
+                justify-content: space-between;
+            }
+            .content-form::before{
+            transform: translate3d(-20%, 10%, 0);
+            -webkit-transform: translate3d(-20%, 10% 0);
+            }
+            .welcome{
+                text-align: left;
+                margin: 5em 0 auto;
+            }
+        
+        }  
+        .content-heading{
+            width:200;
+            font-family:Georgia, 'Times New Roman', Times, serif;
+            font-weight: bold;
+        }
+    </style>
+    </head>
+    <body> 
+        <div id="page" class="site signup-show">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="signup">
+                        <div class="content-heading">
+                            <div class = "y-style">
+                                <div class = "logo"><img src=""></div>
+                                <div class ="welcome">
+                                <h2>Sign Up<br>Now</h2>
+                                <p> Sign up to review your world.</p><br>
+                                {% for message in messages %}
+                                <p style ="color:rgb(255, 0, 0)">{{message}}</p>
+                                {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-form">
+                            <div class="y-style">
+                                <form onsubmit= "return validation5()" action="Registration" method="post">
+                                    {% csrf_token  %}
+                                    <p>
+                                        <label>Username</label>
+                                        <input type="text" class="Name" id="Name" name="Name" placeholder="username">
+                                    </p>
+                                    <div class="row justify-content-center Name-error" style ="color:red">
+               
+                                    </div> 
+                                    <p>
+                                        <label>Email</label>
+                                        <input id ="Email" type="email" name="email" class="Email" placeholder="Enter your email">
+                                    </p>
+                                    <div class="row justify-content-center email-error" style ="color:red">
+               
+                                    </div> 
+                                    <p>
+                                        <label>Password</label>
+                                        <input id ="pwd" type="password" name="Password" class="pwd" placeholder="Enter Password">
+                                    </p>
+                                    <div class="row justify-content-center password-error" style="color:red">
+               
+                                    </div>
+                                    <p>
+                                        <label>Confirm Password</label>
+                                        <input type="password" class="pwd1" id="pwd1" name="cpassword" placeholder="Enter Password">
+                                    </p>
+                                    <div class="row justify-content-center repassword-error" style="color:red"> 
+             
+                                    </div>
+                            
+                                    <p><button type="submit" class="button" id="btn1">Sign up</button></p>
+                                </form>
+                                <div class="social">
+                                    <p><span>Or sign up with</span></p>
+                                    <ul>
+                                        <li><a href="#" class="google"><ion-icon name="logo-google"></ion-icon></a></li>
+                                        <li><a href="#" class="facebook"><ion-icon name="logo-facebook"></ion-icon></a></li>
+                                    </ul>
+                                </div>
+                                <div class="afterform">
+                                    <p>Already have an accout?</p>
+                                    <a href="{% url 'Login' %}" class="t-login" id="login">Login here</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--register form-->
+                </div>
+            </div>
+        </div>
+        <script>
+            const isRequired = (value) =>{
+                if  (value === "") {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            };
+            const isBetween = (name, min, max) => {
+                if(name?.length < min || name?.length > max){
+                    return false;
+                }
+                    return true; 
+            };
+            const isEmailValid = (email) => {
+                const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(email);
+            };
+            const ShowError = (input, value1, message) =>{
+                input.classList.remove('success');
+                input.classList.add('error')
+                value1.innerHTML = message;
+            } 
+            const ShowSuccess = (input,value1) =>{
+                input.classList.remove('error');
+                input.classList.add('success') 
+                value1.innerHTML = "";
+            
+            }
+            const checkUsername = (name1) =>{
+                let valid = false;
+                let name2 = name1.value.trim();
+                const min =  3;
+                const max = 20;
+                let change2 = document.querySelector(".Name-error");
+                if(!isRequired(name2)){
+                   ShowError(name1,change2,'Name cannot be Blank');
+                   return false;
+                }
+                if(!isBetween(name2,min,max)){
+                    ShowError(name1,change2,`Name should be between ${min} and ${max} characters`);
+                    return false;
+                }
+                else{
+                    ShowSuccess(name1,change2);
+                    valid = true;
+                }
+                    return valid;
+
+                };
+            const checkEmail = (Email5) =>{
+                let valid = false;
+                let change = document.querySelector(".email-error");
+                let email1 = Email5.value.trim();
+                if (!isRequired(email1)) {
+                    ShowError(Email5, change,'Email cannot be blank.');
+                    return false
+                } else if (!isEmailValid(email1)) {
+                    ShowError(Email5, change,'Email is not valid.');
+                    return false
+                } else {
+                    ShowSuccess(Email5,change);
+                    valid = true;
+                }
+                return valid;
+            };
+            const checkPassword = (pass1) => {
+                let valid = false;
+                let change1 = document.querySelector(".password-error");
+                let password = pass1.value.trim();
+                if (!isRequired(password)) {
+                    ShowError(pass1,change1, 'Password cannot be blank.');
+                } 
+                else if ((password.length < 4) || (password.length > 20)){
+                    alert("Your Password must be 4 to 20 Character");
+                } 
+                else {
+                    ShowSuccess(pass1,change1);
+                    valid = true;
+                }
+                return valid;
+            };
+            const reCheckPassword = (pass1, pass2)=>{
+                let valid = false;
+                let change2 = document.querySelector( ".repassword-error");
+                let confirmpassword = pass2.value.trim();
+                let password1 = pass1.value.trim();
+                if (!isRequired(confirmpassword)) {
+                    ShowError(pass2, change2, 'Enter the password again');
+                }
+                else if(confirmpassword != password1) {
+                    ShowError(pass2,change2, 'Password should match');
+                }
+                else {
+                    ShowSuccess(pass2,change2);
+                    valid = true;
+                }
+                return valid;
+            }
+            function validation5(){
+                const nameEl = document.querySelector("#Name");
+                const repassword = document.querySelector("#pwd1");
+                const emailEl = document.querySelector('#Email');
+                const passwordEl = document.querySelector('#pwd');
+                let isNameValid = checkUsername(nameEl);
+                let isEmailValid = checkEmail(emailEl);
+                let isPasswordValid = checkPassword(passwordEl);
+                let isrepasswordValid = reCheckPassword(passwordEl,repassword);
+                let isFormValid =  isEmailValid && isPasswordValid && isNameValid && isrepasswordValid;
+                if(!isFormValid){
+                    return false;
+                }
+                    return true;
+            };
+        </script>
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        </body>
+</html>

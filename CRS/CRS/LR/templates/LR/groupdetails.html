@@ -1,0 +1,58 @@
+{% extends 'LR/layout.html' %}
+{%  block body %}
+    <div class="group comments" style="margin: 50px; width: 400px; position: fixed; justify-content:space-between;">
+      <label for="exampleFormControlTextarea1" class="form-label" style="font-weight:bold">Group Comments</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+    </div>
+    <div class="continer" style="display: flex; justify-content:right; margin:50px;"> 
+      <div class="Group Details"> 
+        <ul style="list-style: none;"><br><br>
+          <li><h6 id="Gn">Group Name</h6></li><br>
+          <li><h6 id="Gd">Group Description<h6></li><br>
+          <li><h6 for="count">Comments:(0)<h6></li><br>
+          <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal1">Edit</button><br><br>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Deatils</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button id="savechange" type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                </div>
+              </div>
+            </div>
+          <li><button id="leave" class="btn btn-info">Leave</button></li><br>
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">Members</button>
+          <ul id="list" class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          </ul>
+        </ul>
+      </div>
+    </div>
+   <!--edit  -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <input id="Gname" type="text" name="Group Name" placeholder="Group Name"  style=" border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;"><br><br>
+              <input id="Gdescription" type="text" name="Group Description" placeholder="Group Description" style=" border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">  
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button id="sc" type="button" class="btn btn-primary">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    </div>  
+  <!-- edit -->
+  <script src="groupdetails.js"></script>
+{% endblock %}
